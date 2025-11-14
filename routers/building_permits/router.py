@@ -1,5 +1,6 @@
 """
 Building permits router
+
 """
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
@@ -19,7 +20,7 @@ router = APIRouter()
 
 
 @router.get(
-    "/api/building-permits/",
+    "/",
     response_model=BuildingPermitListResponse,
     summary="List building permits",
 )
@@ -43,7 +44,7 @@ def list_building_permits(
 
 
 @router.post(
-    "/api/building-permits/",
+    "/",
     response_model=BuildingPermitResponse,
     status_code=status.HTTP_201_CREATED,
 )
@@ -61,7 +62,7 @@ def create_building_permit(
 
 
 @router.get(
-    "/api/building-permits/{permit_id}",
+    "/{permit_id}",
     response_model=BuildingPermitResponse,
 )
 def get_building_permit(
@@ -75,7 +76,7 @@ def get_building_permit(
 
 
 @router.put(
-    "/api/building-permits/{permit_id}",
+    "/{permit_id}",
     response_model=BuildingPermitResponse,
 )
 def update_building_permit(
@@ -90,7 +91,7 @@ def update_building_permit(
 
 
 @router.delete(
-    "/api/building-permits/{permit_id}",
+    "/{permit_id}",
     status_code=status.HTTP_204_NO_CONTENT,
 )
 def delete_building_permit(
