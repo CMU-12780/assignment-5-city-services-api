@@ -6,6 +6,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import engine, Base
 
+from routers.building_permits import router as building_permits_router
+
 # Import routers here as you complete them
 from routers.bridges import router as bridges_router
 
@@ -30,6 +32,9 @@ app.add_middleware(
 # Register routers
 # TODO: Add your router here using the pattern below
 app.include_router(bridges_router, prefix="/api/bridges", tags=["Bridges"])
+
+app.include_router(building_permits_router, tags=["Building Permits"])
+
 
 @app.get("/")
 def root():
