@@ -31,6 +31,14 @@ app.add_middleware(
 # TODO: Add your router here using the pattern below
 app.include_router(bridges_router, prefix="/api/bridges", tags=["Bridges"])
 
+from routers.road_sections import router as road_sections_router
+
+app.include_router(
+    road_sections_router,
+    prefix="/api/road-sections",
+    tags=["road sections"],
+)
+
 @app.get("/")
 def root():
     """Root endpoint - API information"""
