@@ -317,3 +317,63 @@ app.include_router(
 - **FastAPI Docs**: https://fastapi.tiangolo.com
 - **SQLAlchemy Docs**: https://docs.sqlalchemy.org
 - **Pydantic Docs**: https://docs.pydantic.dev
+
+## Water Quality Router (student contribution)
+
+This project includes a `water_quality` router that follows the Bridges example. It provides endpoints for storing and querying water quality samples collected at monitoring sites.
+
+Base path: `/api/water-quality`
+
+Endpoints and quick validation examples:
+
+- Create a sample (POST) -> returns 201 and resource body
+
+```bash
+curl -X POST "http://localhost:8000/api/water-quality/" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "site_name": "River Park Sensor",
+        "location": "River Park, Sector 5",
+        "sample_date": "2025-11-19",
+        "ph": 7.2,
+        "turbidity_ntu": 3.4,
+        "dissolved_oxygen_mg_l": 8.1,
+        "nitrates_mg_l": 0.5,
+        "e_coli_count": 12,
+        "status": "good"
+    }'
+```
+
+- List samples (GET)
+
+```bash
+curl "http://localhost:8000/api/water-quality/"
+```
+
+- Get single sample (GET)
+
+```bash
+curl "http://localhost:8000/api/water-quality/1"
+```
+
+- Update sample (PUT)
+
+```bash
+curl -X PUT "http://localhost:8000/api/water-quality/1" -H "Content-Type: application/json" -d '{"status":"fair"}'
+```
+
+- Delete sample (DELETE)
+
+```bash
+curl -X DELETE "http://localhost:8000/api/water-quality/1"
+```
+
+Errors:
+- Requests for non-existent IDs return 404 with a clear message like: `{"detail":"Sample with id 999 not found"}`
+
+Run tests (example):
+
+```bash
+pytest test_water_quality_example.py -q
+```
+
