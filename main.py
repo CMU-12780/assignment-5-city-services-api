@@ -8,6 +8,9 @@ from database import engine, Base
 
 # Import routers here as you complete them
 from routers.bridges import router as bridges_router
+from routers.noise_complaints import router as noise_complaints_router
+
+
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
@@ -30,6 +33,7 @@ app.add_middleware(
 # Register routers
 # TODO: Add your router here using the pattern below
 app.include_router(bridges_router, prefix="/api/bridges", tags=["Bridges"])
+app.include_router(noise_complaints_router, prefix="/api/noise_complaints", tags=["noise_complaints"])
 
 @app.get("/")
 def root():
@@ -39,7 +43,7 @@ def root():
         "version": "1.0.0",
         "endpoints": [
             "/api/bridges",
-            # Add more as routers are completed
+            "/api/noise_complaints"
         ]
     }
 
