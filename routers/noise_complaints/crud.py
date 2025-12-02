@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from typing import Optional
 from sqlalchemy import or_
 from .models import NoiseComplaint, ComplaintStatus, ComplaintCause
-from .schemas import noise_complaints_CREATE, noise_complaints_Update
+from .schemas import NoiseComplaintCreate, NoiseComplaintUpdate
 
 def get_noise_complaints(db: Session, skip: int = 0, limit: int = 100, status: Optional[ComplaintStatus] = None,
     search: Optional[str] = None) -> tuple[list[NoiseComplaint], int]:
@@ -32,7 +32,6 @@ def get_noise_complaints(db: Session, skip: int = 0, limit: int = 100, status: O
 def get_noise_complaint(db: Session, noise_complaint_id: int) -> Optional[NoiseComplaint]:
     # Implementation
     return db.query(NoiseComplaint).filter(NoiseComplaint.id == noise_complaint_id).first()
-    pass
 
 def create_noise_complaint(db: Session, noise_complaint_data: NoiseComplaintCreate)->NoiseComplaint:
     # Implementation
@@ -41,8 +40,6 @@ def create_noise_complaint(db: Session, noise_complaint_data: NoiseComplaintCrea
     db.commit()
     db.refresh(complaint)
     return complaint
-
-    pass
 
 def update_noise_complaint(db: Session, noise_complaint_id: int, noise_complaint_data: NoiseComplaintUpdate)->Optional[NoiseComplaint]:
     # Implementation
@@ -58,8 +55,6 @@ def update_noise_complaint(db: Session, noise_complaint_id: int, noise_complaint
     db.commit()
     db.refresh(noise_complaint)
     return noise_complaint
-
-    pass
 
 def delete_noise_complaint(db: Session, noise_complaint_id: int) -> bool:
     # Implementation
